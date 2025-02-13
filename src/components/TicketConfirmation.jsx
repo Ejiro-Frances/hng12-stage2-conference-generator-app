@@ -1,9 +1,9 @@
-import PropTypes from "prop-types";
 import { jsPDF } from "jspdf";
-import bwipjs from "bwip-js";
+import PropTypes from "prop-types";
+import TicketNumber from "./TicketNumber";
 
 const TicketConfirmation = ({ step, formData, resetStep }) => {
-  const ticketNumber = Math.floor(100000 + Math.random() * 900000).toString(); // Generate a random ticket number
+  const ticketNumber = localStorage.getItem("ticketNumber") || "000000";
 
   // Function to generate barcode and download PDF
   const generatePDF = async () => {
@@ -18,22 +18,15 @@ const TicketConfirmation = ({ step, formData, resetStep }) => {
     doc.text(`Special Request: ${formData.specialRequest || "None"}`, 20, 80);
     doc.text(`Ticket Number: ${ticketNumber}`, 20, 90);
 
-    // Generate barcode
-    const barcodeCanvas = document.createElement("canvas");
-    bwipjs.toCanvas(barcodeCanvas, {
-      bcid: "code128", // Barcode type
-      text: ticketNumber, // Ticket number
-      scale: 3, // Scale factor
-      height: 10, // Barcode height
-      includetext: true,
-      textxalign: "center",
-    });
+    // ✅ Select the existing barcode canvas
+    const barcodeCanvas = document.getElementById("barcodeCanvas");
 
-    // Convert barcode canvas to image and add it to PDF
-    const barcodeImage = barcodeCanvas.toDataURL("image/png");
-    doc.addImage(barcodeImage, "PNG", 20, 100, 120, 20);
+    if (barcodeCanvas) {
+      const barcodeImage = barcodeCanvas.toDataURL("image/png");
+      doc.addImage(barcodeImage, "PNG", 20, 100, 120, 20);
+    }
 
-    // Add avatar image (if uploaded)
+    // ✅ Add avatar image (if uploaded)
     if (formData.avatar) {
       doc.addImage(formData.avatar, "JPEG", 140, 40, 50, 50);
     }
@@ -42,32 +35,78 @@ const TicketConfirmation = ({ step, formData, resetStep }) => {
   };
 
   return (
-    <div className="ticket-confirmation">
-      <div className="step-container">
-        <h2>Your Ticket is Booked!</h2>
-        <p>Step {step}/3</p>
+    <div className="ticket-container">
+      <div>
+        <div className="step-container">
+          <h2 className="step-title">Ready</h2>
+          <p className="step-num">Step {step}/3</p>
+        </div>
         <div className="progress-bar">
           <div className="progress" style={{ width: "100%" }}></div>
         </div>
       </div>
 
-      <div className="ticket">
-        <h3>Techember Fest `&quot;`25</h3>
-        <p>{formData.fullName}</p>
-        <p>{formData.email}</p>
+      <div className="ticket-confirmation-container">
+        <h2>Your Ticket is Booked!</h2>
         <p>
-          🎟 {formData.ticketType} - {formData.quantity} Ticket(s)
+          Check your email for a copy or you can <strong>download</strong>
         </p>
-        <p>📜 Special Request: {formData.specialRequest || "None"}</p>
-        <p>🎫 Ticket Number: {ticketNumber}</p>
 
-        {/* Avatar Display */}
-        {formData.avatar && (
-          <img src={formData.avatar} alt="Avatar" className="avatar-display" />
-        )}
+        <div className="booked-ticket">
+          <div className="user-booking-details-container">
+            <div className="user-booking-details">
+              <h4 className="user-detail-title">Techember Fest &quot;25</h4>
+              <div className="con-details">
+                <p>📍 04 Rumens Road, Ikoyi, Lagos</p>
+                <p>📅 March 15, 2025 | 7:00 PM</p>
+              </div>
+            </div>
+            <div className="avatar-container">
+              {formData.avatar && (
+                <img
+                  src={formData.avatar}
+                  alt="Avatar"
+                  className="avatar-display"
+                />
+              )}
+            </div>
+            <div className="user-details">
+              <div className="border-right border-bottom">
+                <p className="detail-title">Enter your name</p>
+                <h5 className="detail-result">
+                  {formData.fullName || "Avi Chukwu"}
+                </h5>
+              </div>
 
-        {/* Barcode */}
-        <canvas id="barcodeCanvas"></canvas>
+              <div className="border-bottom padding-left">
+                <p className="detail-title ">Enter your email *</p>
+                <h5 className="detail-result email">
+                  {formData.email || "User@email.com"}
+                </h5>
+              </div>
+
+              <div className="border-right border-bottom">
+                <p className="detail-title">Ticket Type:</p>
+                <h5 className="detail-result-type">{formData.ticketType}</h5>
+              </div>
+
+              <div className="border-bottom padding-left">
+                <p className="detail-title">Ticket for:</p>
+                <p className="detail-result-type">{formData.quantity}</p>
+              </div>
+
+              <div>
+                <p className="detail-title">Special request?</p>
+                <p className="detail-result-type">
+                  {formData.specialRequest || "Nil"}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* ✅ Render the TicketNumber component */}
+          <TicketNumber />
+        </div>
       </div>
 
       {/* Buttons */}
@@ -93,7 +132,6 @@ const TicketConfirmation = ({ step, formData, resetStep }) => {
 
 TicketConfirmation.propTypes = {
   step: PropTypes.number.isRequired,
-  prevStep: PropTypes.func.isRequired,
   resetStep: PropTypes.func.isRequired,
   formData: PropTypes.object.isRequired,
 };

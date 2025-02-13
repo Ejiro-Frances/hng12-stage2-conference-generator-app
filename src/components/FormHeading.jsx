@@ -6,9 +6,9 @@ const TitleBox = () => {
         <span className="ticket-description">
           Join us for an unforgettable experience at
         </span>
-        <spa className="ticket-description">
+        <span className="ticket-description">
           [Event Name]! Secure your spot now.
-        </spa>
+        </span>
       </p>
       <p className="event-details">
         <span>📍[Event Location]</span>

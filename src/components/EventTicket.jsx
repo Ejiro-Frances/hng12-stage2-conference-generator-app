@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Header from "./Header/Header";
 import TicketSelection from "./TicketSelection";
 import AttendeeDetails from "./AttendeeDetails";
 import TicketConfirmation from "./TicketConfirmation";
@@ -12,18 +11,7 @@ const getSavedFormData = () => {
 
 const EventTicket = () => {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState(
-    getSavedFormData()
-    // {
-    // ticketType: "",
-    // quantity: "1",
-    // fullName: "",
-    // email: "",
-    // specialRequest: "",
-    // avatar: "",
-
-    //   }
-  );
+  const [formData, setFormData] = useState(getSavedFormData());
 
   // save formData to localstorage
   useEffect(() => {
@@ -35,58 +23,40 @@ const EventTicket = () => {
 
   const resetStep = () => {
     setStep(1);
-    setFormData({
-      //   ticketType: "",
-      //   quantity: "1",
-      //   fullName: "",
-      //   email: "",
-      //   specialRequest: "",
-      //   avatar: "",
-    });
+    setFormData({});
     localStorage.removeItem("formData");
     window.location.reload();
   };
 
   return (
-    <>
-      <Header />
-      <div className="app-container">
-        {step === 1 && (
-          <TicketSelection
-            step={step}
-            nextStep={nextStep}
-            setFormData={setFormData}
-            formData={formData}
-          />
-        )}
-        {step === 2 && (
-          <AttendeeDetails
-            step={step}
-            prevStep={prevStep}
-            nextStep={nextStep}
-            setFormData={setFormData}
-            formData={formData}
-          />
-        )}
-        {step === 3 && (
-          <TicketConfirmation
-            step={step}
-            prevStep={prevStep}
-            resetStep={resetStep}
-            formData={formData}
-          />
-        )}
-      </div>
-    </>
+    <main className="main">
+      {step === 1 && (
+        <TicketSelection
+          step={step}
+          nextStep={nextStep}
+          setFormData={setFormData}
+          formData={formData}
+        />
+      )}
+      {step === 2 && (
+        <AttendeeDetails
+          step={step}
+          prevStep={prevStep}
+          nextStep={nextStep}
+          setFormData={setFormData}
+          formData={formData}
+        />
+      )}
+      {step === 3 && (
+        <TicketConfirmation
+          step={step}
+          prevStep={prevStep}
+          resetStep={resetStep}
+          formData={formData}
+        />
+      )}
+    </main>
   );
 };
 
 export default EventTicket;
-
-// import "./styles.css";
-// import MyTickets from "./components/MyTickets";
-
-// function App() {
-//   return <MyTickets />;
-// }
-// export default App;

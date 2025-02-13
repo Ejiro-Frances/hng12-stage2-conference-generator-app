@@ -27,6 +27,23 @@ html {
   display: none;
 }
 
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  padding: 1rem;
+  font-size: 1.8rem;
+  color: #b3b3b3;
+}
+.nav-link.active,
+.nav-link:hover {
+  color: #fff;
+}
 .header button {
   box-sizing: border-box;
   display: flex;
@@ -161,5 +178,8 @@ button:hover span {
   .header {
     border-radius: 1.2rem;
     width: 90%;
+  }
+  .nav-links {
+    display: none;
   }
 }

@@ -6,17 +6,17 @@ import Line from "./Line";
 
 const ticketTypes = [
   {
-    name: "Regular Access",
+    name: "Regular",
     price: "Free",
     slotLeft: "20/52",
   },
   {
-    name: "VIP Access",
+    name: "VIP",
     price: "$50",
     slotLeft: "20/52",
   },
   {
-    name: "VVIP Access",
+    name: "VVIP",
     price: "$150",
     slotLeft: "20/52",
   },
@@ -44,6 +44,11 @@ const TicketSelection = ({
           ...prev,
           ...values,
         }));
+
+        // save to local storage
+        localStorage.setItem("ticketType", values.ticketType);
+        localStorage.setItem("quantity", values.quantity);
+
         nextStep(); // Move to the next step
       }}
     >
@@ -90,7 +95,7 @@ const TicketSelection = ({
           <div className="ticket-quantity">
             <label className="quantity-label">Number of Tickets:</label>
             <Field as="select" name="quantity" className="quantity-select">
-              {Array.from({ length: 32 }, (_, i) => i + 1).map((num) => (
+              {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
                 <option key={num} value={num}>
                   {num}
                 </option>
@@ -130,7 +135,7 @@ const Ticket = ({ ticketObj, setFieldValue, values }) => {
       onClick={() => setFieldValue("ticketType", ticketObj.name)}
     >
       <p className="ticket-price">{ticketObj.price}</p>
-      <p className="ticket-name">{ticketObj.name}</p>
+      <p className="ticket-name">{ticketObj.name} Access</p>
       <span className="ticket-left">{ticketObj.slotLeft} left</span>
     </li>
   );
@@ -144,4 +149,15 @@ TicketSelection.propTypes = {
   formData: PropTypes.object.isRequired,
 };
 
+Ticket.propTypes = {
+  ticketObj: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    slotLeft: PropTypes.string.isRequired,
+  }).isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+  values: PropTypes.shape({
+    ticketType: PropTypes.string,
+  }).isRequired,
+};
 export default TicketSelection;

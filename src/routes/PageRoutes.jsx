@@ -1,13 +1,15 @@
-// import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-// const PageRoutes = () => {
-//   return (
-//     <Routes>
-//       <Route path="/" element={<Events />} />
-//       <Route path="/about-project" element={<About />} />
-//       <Route path="/tickets" element={<Tickets />} />
-//     </Routes>
-//   );
-// };
+import Events from "../components/EventTicket";
+// import Tickets from "../components/TicketSelection";
 
-// export default PageRoutes;
+const PageRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Events />} />
+      {/* <Route path="/tickets" element={<Tickets />} /> */}
+    </Routes>
+  );
+};
+
+export default PageRoutes;
