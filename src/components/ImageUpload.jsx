@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { CloudArrowDownIcon } from "@heroicons/react/24/solid";
 
 const ImageUpload = () => {
   const [imagePreview, setImagePreview] = useState(null);
@@ -41,13 +40,15 @@ const ImageUpload = () => {
         hidden
         accept="image/*"
         onChange={handleFileChange}
+        className="img-upload-input"
       />
       <label htmlFor="file-upload" className="upload-area">
         {imagePreview ? (
           <img src={imagePreview} alt="Preview" className="image-preview" />
         ) : (
           <div>
-            <CloudArrowDownIcon className="upload-icon" />
+            <img src="../assets/cloud-icon" alt="" />
+
             <p className="drag-text">Drag & drop or click to upload</p>
           </div>
         )}

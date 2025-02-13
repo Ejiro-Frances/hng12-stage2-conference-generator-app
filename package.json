@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "bwip-js": "^4.5.1",
     "formik": "^2.4.6",
     "idb": "^8.0.2",
+    "jspdf": "^2.5.2",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

@@ -1,0 +1,165 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.6rem;
+  max-width: 120rem;
+  width: 100%;
+  height: 7.6rem;
+  margin: 2rem auto;
+  background: #05252c;
+  border: 1px solid #197686;
+  backdrop-filter: blur(2px);
+  border-radius: 2.4rem;
+}
+
+.header .menu {
+  display: none;
+}
+
+.header button {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 8px;
+  width: 141px;
+  height: 44px;
+  background: #ffffff;
+  border: 1px solid rgba(213, 234, 0, 0.1);
+  border-radius: 12px;
+  transition: all 300 ease;
+  -webkit-transition: all 300 ease;
+  -moz-transition: all 300 ease;
+  -ms-transition: all 300 ease;
+  -o-transition: all 300 ease;
+}
+
+button span {
+  font-family: "JejuMyeongjo", serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  color: #0a0c11;
+}
+
+button img {
+  width: 16px;
+  transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -moz-transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -ms-transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -o-transition: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+button:hover img {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+
+button:hover {
+  background: #24a0b5;
+  border: 1px solid #d9d9d9;
+}
+
+button:hover span {
+  color: #d9d9d9;
+}
+
+@media screen and (max-width: 320px) {
+  .header > img {
+    --width: 28.694%;
+    width: var(--width);
+    height: calc(var(--width) / 0.3921px);
+  }
+
+  .header button {
+    --width: 60%;
+    width: var(--width);
+  }
+
+  button span {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .header {
+    width: min(84vw, 1200px);
+    height: 76px;
+    border-radius: 24px;
+  }
+
+  .header > img {
+    width: 91.79px;
+    height: 36px;
+  }
+
+  .header .menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    min-width: 341px;
+    height: 34px;
+  }
+
+  .menu a {
+    padding: 10px;
+    font-family: "JejuMyeongjo", serif;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 18px;
+    color: #b3b3b3;
+    transition: color 300ms ease-in-out;
+    -webkit-transition: color 300ms ease-in-out;
+    -moz-transition: color 300ms ease-in-out;
+    -ms-transition: color 300ms ease-in-out;
+    -o-transition: color 300ms ease-in-out;
+  }
+
+  .menu .active {
+    color: #fff;
+  }
+
+  .menu a:hover:not(.active) {
+    color: #eee;
+  }
+
+  .header button {
+    padding: 16px 24px;
+    width: 169px;
+    height: 52px;
+  }
+
+  button span {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    border-radius: 1.2rem;
+    width: 90%;
+  }
+}

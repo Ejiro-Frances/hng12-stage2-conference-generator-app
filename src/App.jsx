@@ -1,7 +1,11 @@
 import "./styles.css";
-import MyTickets from "./components/MyTickets";
+import EventTicket from "./components/EventTicket";
 
-function App() {
-  return <MyTickets />;
-}
+const App = () => {
+  return (
+    <div>
+      <EventTicket />;
+    </div>
+  );
+};
 export default App;
