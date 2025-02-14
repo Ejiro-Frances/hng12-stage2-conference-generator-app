@@ -1,30 +1,24 @@
-import { BrowserRouter as Router } from "react-router-dom";
-import PageRoutes from "./routes/PageRoutes";
-import Header from "./components/Header/Header"; // Move Header here
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import "./styles.css";
+import Header from "./components/Header/Header";
+import Events from "./components/EventTicket";
+import EventTicket from "./components/EventTicket";
+import About from "./components/About";
+import MyTicket from "./components/MyTicket";
 
 const App = () => {
   return (
     <Router>
       <Header />
-      <PageRoutes />
+      <Routes>
+        <Route path="/" element={<Events />} />
+        <Route path="/tickets" element={<EventTicket />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/myticket" element={<MyTicket />} />
+      </Routes>
     </Router>
   );
 };
 
 export default App;
-
-// import PageRoutes from "./routes/PageRoutes";
-
-// import "./styles.css";
-// import EventTicket from "./components/EventTicket";
-
-// const App = () => {
-//   return (
-//     <div>
-//       <PageRoutes />
-//       <EventTicket />;
-//     </div>
-//   );
-// };
-// export default App;

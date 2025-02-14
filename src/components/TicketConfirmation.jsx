@@ -1,8 +1,15 @@
 import { jsPDF } from "jspdf";
 import PropTypes from "prop-types";
 import TicketNumber from "./TicketNumber";
+import { useEffect } from "react";
 
 const TicketConfirmation = ({ step, formData, resetStep }) => {
+  useEffect(() => {
+    if (formData) {
+      localStorage.setItem("savedTicket", JSON.stringify(formData));
+    }
+  }, [formData]);
+
   const ticketNumber = localStorage.getItem("ticketNumber") || "000000";
 
   // Function to generate barcode and download PDF
@@ -18,7 +25,7 @@ const TicketConfirmation = ({ step, formData, resetStep }) => {
     doc.text(`Special Request: ${formData.specialRequest || "None"}`, 20, 80);
     doc.text(`Ticket Number: ${ticketNumber}`, 20, 90);
 
-    // ✅ Select the existing barcode canvas
+    //  Select the existing barcode canvas
     const barcodeCanvas = document.getElementById("barcodeCanvas");
 
     if (barcodeCanvas) {
@@ -26,7 +33,7 @@ const TicketConfirmation = ({ step, formData, resetStep }) => {
       doc.addImage(barcodeImage, "PNG", 20, 100, 120, 20);
     }
 
-    // ✅ Add avatar image (if uploaded)
+    // Add avatar image
     if (formData.avatar) {
       doc.addImage(formData.avatar, "JPEG", 140, 40, 50, 50);
     }

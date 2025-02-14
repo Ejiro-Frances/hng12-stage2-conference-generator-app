@@ -1,8 +1,8 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./header.css";
 
 const Header = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <header className="header">
       <img className="logo" src="logo.svg" alt="Logo" />
@@ -21,20 +21,16 @@ const Header = () => {
           My Tickets
         </NavLink>
         <NavLink
-          to="/about-project"
+          to="/about"
           className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
         >
           About Project
         </NavLink>
       </nav>
-      <button
-        onClick={() => {
-          navigate("/tickets");
-        }}
-      >
+      <NavLink to="/myticket" className="header-button">
         <span>MY TICKETS</span>
         <img src="arrowright.svg" alt="Right arrow" />
-      </button>
+      </NavLink>
     </header>
   );
 };
