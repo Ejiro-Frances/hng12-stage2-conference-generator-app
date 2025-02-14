@@ -28,8 +28,9 @@ const TicketNumber = () => {
           displayValue: false,
           lineColor: "#fff",
           width: 2,
-          height: 50,
+          height: 40,
           margin: 0,
+          background: "transparent",
         });
       }
     }, 500);

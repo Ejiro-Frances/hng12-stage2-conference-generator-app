@@ -47,7 +47,7 @@ const TicketConfirmation = ({ step, formData, resetStep }) => {
       </div>
 
       <div className="ticket-confirmation-container">
-        <h2>Your Ticket is Booked!</h2>
+        <h2 className="confirmation-title">Your Ticket is Booked!</h2>
         <p>
           Check your email for a copy or you can <strong>download</strong>
         </p>

@@ -401,6 +401,11 @@ label {
   text-align: center;
   width: 100%;
   margin: 3.2rem auto;
+  font-family: Roboto;
+}
+.confirmation-title {
+  font-weight: bold;
+  font-size: 3.2rem;
 }
 .booked-ticket {
   background-image: url("../public/confirmation-container.png");
@@ -463,21 +468,9 @@ label {
   border-radius: 1.2rem;
   object-fit: cover;
 }
-/* .bar-code-container {
-   display: flex;
-  flex-direction: column;
-  align-items: center; 
-} */
+
 .bar-code {
-  width: 100%;
-  height: 3rem;
-  background: repeating-linear-gradient(
-    90deg,
-    white 0px,
-    white 2px,
-    transparent 2px,
-    transparent 8px
-  );
+  height: 15rem;
 }
 
 .user-details {
@@ -575,5 +568,9 @@ label {
   }
   .upload-box {
     background: transparent;
+  }
+  .confirmation-title {
+    font-size: 2.4rem;
+    font-weight: bold;
   }
 }
