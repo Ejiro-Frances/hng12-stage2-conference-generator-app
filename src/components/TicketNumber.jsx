@@ -33,7 +33,7 @@ const TicketNumber = () => {
           background: "transparent",
         });
       }
-    }, 500);
+    }, 300);
   }, []);
 
   return (

@@ -546,8 +546,22 @@ label {
 .c-ticket {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 3.2rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1.8rem;
+  overflow: hidden;
+}
+.mobile-p {
+  display: none;
+}
+.desktop-p {
+  display: block;
+}
+.d {
+  cursor: pointer;
+}
+.d:hover {
+  text-decoration: underline;
 }
 /* ********************************************** */
 /* ********************************************** */
@@ -606,5 +620,11 @@ label {
   .confirmation-title {
     font-size: 2.4rem;
     font-weight: bold;
+  }
+  .mobile-p {
+    display: block;
+  }
+  .desktop-p {
+    display: none;
   }
 }

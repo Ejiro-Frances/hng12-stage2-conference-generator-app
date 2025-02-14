@@ -28,9 +28,11 @@ const TicketConfirmation = ({ step, formData, resetStep }) => {
     //  Select the existing barcode canvas
     const barcodeCanvas = document.getElementById("barcodeCanvas");
 
-    if (barcodeCanvas) {
+    if (barcodeCanvas && barcodeCanvas instanceof HTMLCanvasElement) {
       const barcodeImage = barcodeCanvas.toDataURL("image/png");
       doc.addImage(barcodeImage, "PNG", 20, 100, 120, 20);
+    } else {
+      console.error("Barcode canvas not found!");
     }
 
     // Add avatar image
@@ -55,8 +57,18 @@ const TicketConfirmation = ({ step, formData, resetStep }) => {
 
       <div className="ticket-confirmation-container">
         <h2 className="confirmation-title">Your Ticket is Booked!</h2>
-        <p>
-          Check your email for a copy or you can <strong>download</strong>
+        <p className="desktop-p">
+          Check your email for a copy or you can
+          <strong className="d" onClick={generatePDF}>
+            download
+          </strong>
+        </p>
+        <p className="mobile-p">
+          You can
+          <span className="d" onClick={generatePDF}>
+            download
+          </span>
+          or check your email for a copy
         </p>
 
         <div className="booked-ticket">
@@ -111,7 +123,7 @@ const TicketConfirmation = ({ step, formData, resetStep }) => {
             </div>
           </div>
 
-          {/* ✅ Render the TicketNumber component */}
+          {/* Render the TicketNumber component */}
           <TicketNumber />
         </div>
       </div>
@@ -129,6 +141,7 @@ const TicketConfirmation = ({ step, formData, resetStep }) => {
           type="button"
           className="button button-primary"
           onClick={generatePDF}
+          id="download"
         >
           Download Ticket
         </button>
