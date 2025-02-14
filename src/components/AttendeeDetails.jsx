@@ -88,7 +88,7 @@ const AttendeeDetails = ({
             <div className="upload-box">
               <label className="upload-area">
                 {loading ? (
-                  <p>Uploading...</p>
+                  <p className="uploading">Uploading...</p>
                 ) : (
                   <img src="upload.svg" alt="upload" />
                 )}
