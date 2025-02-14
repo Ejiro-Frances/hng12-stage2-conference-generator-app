@@ -14,18 +14,64 @@ const TicketConfirmation = ({ step, formData, resetStep }) => {
 
   // Function to generate barcode and download PDF
   const generatePDF = async () => {
-    const doc = new jsPDF();
-    doc.setFontSize(16);
-    doc.text("Conference Ticket", 80, 20);
-    doc.setFontSize(12);
-    doc.text(`Name: ${formData.fullName}`, 20, 40);
-    doc.text(`Email: ${formData.email}`, 20, 50);
-    doc.text(`Ticket Type: ${formData.ticketType}`, 20, 60);
-    doc.text(`Number of Tickets: ${formData.quantity}`, 20, 70);
-    doc.text(`Special Request: ${formData.specialRequest || "None"}`, 20, 80);
-    doc.text(`Ticket Number: ${ticketNumber}`, 20, 90);
+    const doc = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+    });
 
-    //  Select the existing barcode canvas
+    // Set Background Color
+    doc.setFillColor(14, 70, 79); // #0e464f
+    doc.rect(0, 0, 210, 297, "F"); // Fills the entire page with color
+
+    // Add Background Image (Ensure it's Base64 or an Online URL)
+    const backgroundImage = "../public/confirmation-container.png";
+    doc.addImage(backgroundImage, "JPEG", 0, 0, 210, 297);
+    doc.setTextColor(250, 250, 250); // #fafafa
+    // Title
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(24);
+    doc.text('Techember Fest "25', 60, 30);
+    // Event Location
+    doc.setFontSize(12);
+    doc.text("04 Rumens Road, Ikoyi, Lagos", 60, 40);
+    doc.text("March 15, 2025 | 7:00 PM", 60, 50);
+    // Avatar
+    if (formData.avatar) {
+      doc.addImage(formData.avatar, "JPEG", 80, 55, 50, 50);
+    }
+
+    // Grid Layout
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.text("Name", 20, 120);
+    doc.text("Email Address", 120, 120);
+
+    doc.setFont("helvetica", "normal");
+    doc.text(formData.fullName, 20, 130);
+    doc.text(formData.email, 120, 130);
+
+    doc.setFont("helvetica", "bold");
+    doc.text("Ticket Type:", 20, 150);
+    doc.text("Ticket for:", 120, 150);
+
+    doc.setFont("helvetica", "normal");
+    doc.text(formData.ticketType, 20, 160);
+    doc.text(formData.quantity, 120, 160);
+
+    // Special Request
+    doc.setFont("helvetica", "bold");
+    doc.text("Special request?", 20, 180);
+    doc.setFont("helvetica", "italic");
+    doc.text(formData.specialRequest || "None", 20, 190);
+
+    // Ticket Number and Barcode
+    doc.setFont("helvetica", "bold");
+    doc.text("Ticket Number:", 20, 220);
+    doc.setFont("helvetica", "normal");
+    doc.text(ticketNumber, 60, 220);
+
+    // Add Barcode Image
     const barcodeCanvas = document.getElementById("barcodeCanvas");
 
     if (barcodeCanvas && barcodeCanvas instanceof HTMLCanvasElement) {
@@ -34,12 +80,7 @@ const TicketConfirmation = ({ step, formData, resetStep }) => {
     } else {
       console.error("Barcode canvas not found!");
     }
-
-    // Add avatar image
-    if (formData.avatar) {
-      doc.addImage(formData.avatar, "JPEG", 140, 40, 50, 50);
-    }
-
+    // Save the PDF
     doc.save("conference_ticket.pdf");
   };
 
